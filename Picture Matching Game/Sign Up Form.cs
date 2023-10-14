@@ -14,9 +14,9 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace Picture_Matching_Game
 {
-    public partial class Form3 : Form
+    public partial class signUpForm : Form
     {
-        public Form3()
+        public signUpForm()
         {
             InitializeComponent();
         }
@@ -37,7 +37,8 @@ namespace Picture_Matching_Game
                 passwordTextBox.Focus();
                 return;
             }
-            //connecting submit button
+
+            //connecting submit button with sql server
             try
             {
                 var connectionString = "Data Source=LAPTOP-Q7KTNQDN\\SQLEXPRESS;Initial Catalog=\"Picture Matching Game Database\";Integrated Security=True";
@@ -55,11 +56,11 @@ namespace Picture_Matching_Game
                 sqlCommand.ExecuteNonQuery();
                 sqlConnection.Close();
 
-                MessageBox.Show("Signing up Succesfully!!","Good Job",MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Signing up Succesfully!!", "Good Job", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Somthing went wrong","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Somthing went wrong", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             UserNametextBox.Clear();
             matricIDtextBox.Clear();
@@ -70,18 +71,10 @@ namespace Picture_Matching_Game
         private void exitButton_Click(object sender, EventArgs e)
         {
             //For connecting exit button with next loaded form
-            DialogResult res;
-            res = MessageBox.Show("Do you want to exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (res == DialogResult.Yes)
-            {
-                Form2 form2 = new Form2();
-                form2.Show();
-                this.Hide();
-            }
-            else
-            {
-                this.Show();
-            }
+
+            Form1 form = new Form1();
+            form.Show();
+            this.Hide();
         }
     }
 }
