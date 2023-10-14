@@ -58,35 +58,10 @@ namespace Picture_Matching_Game
                 sqlConnection.Close();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void signUpButton_Click(object sender, EventArgs e)
         {
             //For connecting signup(exit) button with next loaded form
-            DialogResult res;
+            /*DialogResult res;
             res = MessageBox.Show("Do you want to exit & Sign up", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
@@ -97,7 +72,11 @@ namespace Picture_Matching_Game
             else
             {
                 this.Show();
-            }
+            }*/
+            Form3 form3 = new Form3();
+            form3.Show();
+            this.Hide();
+
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Picture_Matching_Game
         private void SignUpButton_Click(object sender, EventArgs e)
         {
             //For connecting signup button with signup form
-            DialogResult res;
+            /* DialogResult res;
             res = MessageBox.Show("Do you want to Sign up", "Sign up", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
@@ -33,26 +33,32 @@ namespace Picture_Matching_Game
             else
             {
                 this.Show();
-            }
+            }*/
+            Form3 form3 = new Form3();
+            form3.Show();
+            this.Hide();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
             //For connecting signup button with signup form
-            DialogResult res;
+            /* DialogResult res;
             res = MessageBox.Show("Do you want to Login", "Login", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
                 //form that neeed to load next(form 3 is signup form)
 
-                Login_Form form4 = new Login_Form();
-                form4.Show();
+                Login_Form form = new Login_Form();
+                form.Show();
                 this.Hide();
             }
             else
             {
                 this.Show();
-            }
+            }*/
+            Login_Form form = new Login_Form();
+            form.Show();
+            this.Hide();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Picture_Matching_Game
         private void submitButton_Click(object sender, EventArgs e)
         {
             //for must be fill username and password
-            if (UserNametextBox.Text.Trim() == "")       //trim for not accept space in username
+            if (UserNametextBox.Text.Trim() == "")       //trim for not accepting space as a string in username
             {
                 MessageBox.Show("Please! Enter your Username", "Username", MessageBoxButtons.OK);
                 UserNametextBox.Focus();
