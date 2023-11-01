@@ -78,7 +78,7 @@
             exitButton.BackColor = Color.FromArgb(255, 192, 192);
             exitButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             exitButton.ForeColor = SystemColors.ActiveCaptionText;
-            exitButton.Location = new Point(256, 231);
+            exitButton.Location = new Point(265, 255);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(80, 35);
             exitButton.TabIndex = 9;

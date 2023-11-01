@@ -30,5 +30,12 @@ namespace Picture_Matching_Game
             logInForm.Show();
             this.Hide();
         }
+
+        private void WinnerListbutton_Click(object sender, EventArgs e)
+        {
+            WinnerFormList winnerListForm = new WinnerFormList();
+            winnerListForm.ShowDialog();
+            this.Hide();
+        }
     }
 }

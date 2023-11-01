@@ -36,6 +36,7 @@
             loginButton = new Button();
             signUpButton = new Button();
             label4 = new Label();
+            exitButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -116,12 +117,26 @@
             label4.TabIndex = 3;
             label4.Text = "You have no account?";
             // 
+            // exitButton
+            // 
+            exitButton.BackColor = SystemColors.Control;
+            exitButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            exitButton.ForeColor = SystemColors.ActiveCaptionText;
+            exitButton.Location = new Point(47, 275);
+            exitButton.Name = "exitButton";
+            exitButton.Size = new Size(80, 35);
+            exitButton.TabIndex = 9;
+            exitButton.Text = "Exit";
+            exitButton.UseVisualStyleBackColor = false;
+            exitButton.Click += exitButton_Click;
+            // 
             // Login_Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.login_image;
             ClientSize = new Size(474, 331);
+            Controls.Add(exitButton);
             Controls.Add(signUpButton);
             Controls.Add(loginButton);
             Controls.Add(PasswordTextBox);
@@ -146,5 +161,6 @@
         private Button loginButton;
         private Button signUpButton;
         private Label label4;
+        private Button exitButton;
     }
 }

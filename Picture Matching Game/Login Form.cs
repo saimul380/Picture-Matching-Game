@@ -60,6 +60,10 @@ namespace Picture_Matching_Game
                         gameForm form = new gameForm();
                         form.Show();
                         this.Hide();
+
+                        // Set the Username property of the winnerListForm(transfer username for winnerList)
+                        form.username = username;
+
                     }
                     else
                     {
@@ -74,14 +78,21 @@ namespace Picture_Matching_Game
             {
                 MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //sqlConnection.Close();
         }
-
         private void signUpButton_Click(object sender, EventArgs e)
         {
             //For connecting signup(exit) button with next loaded form
             signUpForm signupform = new signUpForm();
             signupform.Show();
+            this.Hide();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            //For connecting exit button with next loaded form
+
+            openingForm form = new openingForm();
+            form.Show();
             this.Hide();
         }
     }

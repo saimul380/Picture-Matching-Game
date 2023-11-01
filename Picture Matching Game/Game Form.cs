@@ -1,9 +1,12 @@
+using System.Data.SqlClient;
 using System.Globalization;
 
 namespace Picture_Matching_Game
 {
     public partial class gameForm : Form
     {
+        public string username { get; set; }
+
         List<int> numbers = new List<int> { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
         string firstChoice;
         string secondChoice;
@@ -28,7 +31,7 @@ namespace Picture_Matching_Game
 
             if (countDownTime < 1)
             {
-                GameOver("Times Up, You Lose");
+                GameOver("You Lose");
 
                 foreach (PictureBox x in pictures)
                 {
@@ -45,7 +48,6 @@ namespace Picture_Matching_Game
         private void RestartGameEvent(object sender, EventArgs e)
         {
             restartGame();
-
         }
         private void loadPictures()
         {
@@ -91,7 +93,7 @@ namespace Picture_Matching_Game
             if (firstChoice == null)
             {
                 picA = sender as PictureBox;
-                if ( picA.Tag != null && picA.Image == null)
+                if (picA.Tag != null && picA.Image == null)
                 {
                     picA.Image = Image.FromFile("pics/" + (string)picA.Tag + ".png");
                     firstChoice = (string)picA.Tag;
@@ -100,7 +102,7 @@ namespace Picture_Matching_Game
             else if (secondChoice == null)
             {
                 picB = sender as PictureBox;
-                if ( picB.Tag != null && picB.Image == null)
+                if (picB.Tag != null && picB.Image == null)
                 {
                     picB.Image = Image.FromFile("pics/" + (string)picB.Tag + ".png");
                     secondChoice = (string)picB.Tag;
@@ -125,7 +127,7 @@ namespace Picture_Matching_Game
                 pictures[i].Tag = numbers[i].ToString();
             }
             tries = 0;
-            labelStatus.Text = " Mismatched: " + tries + "times.";
+            labelStatus.Text = " Mismatched: " + tries + " times.";
             lb_timeLeft.Text = "Time Left: " + totalTime;
             gameOver = false;
             gameTimer.Start();
@@ -134,7 +136,7 @@ namespace Picture_Matching_Game
 
         private void checkPictures(PictureBox A, PictureBox B)
         {
-            if(firstChoice == secondChoice)
+            if (firstChoice == secondChoice)
             {
                 A.Tag = null;
                 B.Tag = null;
@@ -142,22 +144,46 @@ namespace Picture_Matching_Game
             else
             {
                 tries++;
-                labelStatus.Text = "Mismatched " + tries + "times.";
+                labelStatus.Text = "Mismatched: " + tries + " times.";
             }
             firstChoice = null;
             secondChoice = null;
 
-            foreach ( PictureBox pics in pictures.ToList())
+            foreach (PictureBox pics in pictures.ToList())
             {
-                if(pics.Tag != null)
+                if (pics.Tag != null)
                 {
                     pics.Image = null;
                 }
             }
             // now check if all of the items have been solved
-            if (pictures.All(o=> o.Tag == pictures[0].Tag))
+            if (pictures.All(o => o.Tag == null))
             {
-                GameOver("Great Work, You Win!!");
+                gameTimer.Stop();
+                gameOver = true;
+                MessageBox.Show("Great Work, You Win!!");
+                try
+                {
+                    string usernameOfTheWinner = username; // Replace with the actual username
+                    DateTime winTimestamp = DateTime.Now;
+
+                    var connectionStr = ConnectionString.GetConnectionString(); //for use connectingSting Class
+                    SqlConnection sqlConnection = new SqlConnection(connectionStr);
+
+
+                    sqlConnection.Open();
+                    var insertQuery = "INSERT INTO WinnerTable VALUES (@Username, @WinTimestamp)";
+                    SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@Username", usernameOfTheWinner);
+                    sqlCommand.Parameters.AddWithValue("@WinTimestamp", winTimestamp);
+                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Somthing went wrong to insert High Scorer List");
+                }              
             }
         }
 
@@ -165,7 +191,8 @@ namespace Picture_Matching_Game
         {
             gameTimer.Stop();
             gameOver = true;
-            MessageBox.Show(msg + "  Click Restart to Play Again.", "Restart");
+            MessageBox.Show(msg + " Times Up! Click Restart to Play Again.", "Restart");
+
 
         }
 
@@ -176,8 +203,8 @@ namespace Picture_Matching_Game
             res = MessageBox.Show("Do you want to exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
-                openingForm form2 = new openingForm();
-                form2.Show();
+                openingForm form = new openingForm();
+                form.Show();
                 this.Hide();
             }
             else
