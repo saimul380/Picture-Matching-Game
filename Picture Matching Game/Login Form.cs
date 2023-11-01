@@ -13,12 +13,12 @@ namespace Picture_Matching_Game
 {
     public partial class Login_Form : Form
     {
+        private ConnectionString connectionString = new ConnectionString();
         public Login_Form()
         {
             InitializeComponent();
         }
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=LAPTOP-Q7KTNQDN\SQLEXPRESS;Initial Catalog=""Picture Matching Game Database"";Integrated Security=True");
-
+        //SqlConnection sqlConnection = new SqlConnection(@"Data Source=LAPTOP-Q7KTNQDN\SQLEXPRESS;Initial Catalog=""Picture Matching Game Database"";Integrated Security=True");
         private void loginButton_Click(object sender, EventArgs e)
         {
             //for must be fill username and password
@@ -40,35 +40,41 @@ namespace Picture_Matching_Game
 
             try
             {
-                String querry = "SELECT * FROM Login_table WHERE username ='" + UserNametextBox.Text + "' AND password = '" + PasswordTextBox.Text + "'";
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
+                string connectionStr = ConnectionString.GetConnectionString(); //for use connectingSting Class
 
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-
-                if (dataTable.Rows.Count > 0)
+                using (SqlConnection sqlConnection = new SqlConnection(connectionStr))
                 {
-                    username = UserNametextBox.Text;
-                    password = PasswordTextBox.Text;
+                    sqlConnection.Open();
+                    String querry = "SELECT * FROM Login_table WHERE username ='" + UserNametextBox.Text + "' AND password = '" + PasswordTextBox.Text + "'";
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
 
-                    //for load to next form
-                    gameForm form = new gameForm();
-                    form.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    UserNametextBox.Clear();
-                    PasswordTextBox.Clear();
-                    UserNametextBox.Focus();
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        username = UserNametextBox.Text;
+                        password = PasswordTextBox.Text;
+
+                        //for load to next form
+                        gameForm form = new gameForm();
+                        form.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        UserNametextBox.Clear();
+                        PasswordTextBox.Clear();
+                        UserNametextBox.Focus();
+                    }
                 }
             }
             catch
             {
                 MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            sqlConnection.Close();
+            //sqlConnection.Close();
         }
 
         private void signUpButton_Click(object sender, EventArgs e)
@@ -77,7 +83,6 @@ namespace Picture_Matching_Game
             signUpForm signupform = new signUpForm();
             signupform.Show();
             this.Hide();
-
         }
     }
 }

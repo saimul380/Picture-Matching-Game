@@ -40,8 +40,8 @@ namespace Picture_Matching_Game
 
             //connecting submit button with sql server
             try
-            {
-                var connectionString = "Data Source=LAPTOP-Q7KTNQDN\\SQLEXPRESS;Initial Catalog=\"Picture Matching Game Database\";Integrated Security=True";
+            {   //connecting connectionstring with class
+                string connectionString = ConnectionString.GetConnectionString();
 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
                 sqlConnection.Open();
