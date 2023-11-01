@@ -72,7 +72,7 @@ namespace Picture_Matching_Game
         {
             //For connecting exit button with next loaded form
 
-            Form1 form = new Form1();
+            openingForm form = new openingForm();
             form.Show();
             this.Hide();
         }

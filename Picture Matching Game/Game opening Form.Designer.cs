@@ -1,6 +1,6 @@
 ﻿namespace Picture_Matching_Game
 {
-    partial class Form1
+    partial class openingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -71,7 +71,7 @@
             loginButton.UseVisualStyleBackColor = false;
             loginButton.Click += loginButton_Click_1;
             // 
-            // Form1
+            // openingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -79,7 +79,7 @@
             Controls.Add(loginButton);
             Controls.Add(signUpButton);
             Controls.Add(openingPageLebel);
-            Name = "Form1";
+            Name = "openingForm";
             Text = "Game Opening Page";
             ResumeLayout(false);
             PerformLayout();

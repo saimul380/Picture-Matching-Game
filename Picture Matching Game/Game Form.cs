@@ -121,7 +121,7 @@ namespace Picture_Matching_Game
             res = MessageBox.Show("Do you want to exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
-                Form1 form2 = new Form1();
+                openingForm form2 = new openingForm();
                 form2.Show();
                 this.Hide();
             }

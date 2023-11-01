@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Picture_Matching_Game
 {
-    public partial class Form1 : Form
+    public partial class openingForm : Form
     {
-        public Form1()
+        public openingForm()
         {
             InitializeComponent();
         }
