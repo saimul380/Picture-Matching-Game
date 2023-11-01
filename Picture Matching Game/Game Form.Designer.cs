@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            label1 = new Label();
+            labelStatus = new Label();
             lb_timeLeft = new Label();
             button_Restart = new Button();
             gameTimer = new System.Windows.Forms.Timer(components);
             exitButton = new Button();
             SuspendLayout();
             // 
-            // label1
+            // labelStatus
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(256, 101);
-            label1.Name = "label1";
-            label1.Size = new Size(111, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Match or MisMatch";
+            labelStatus.AutoSize = true;
+            labelStatus.Location = new Point(256, 101);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new Size(111, 15);
+            labelStatus.TabIndex = 0;
+            labelStatus.Text = "Match or MisMatch";
             // 
             // lb_timeLeft
             // 
@@ -94,7 +94,7 @@
             Controls.Add(exitButton);
             Controls.Add(button_Restart);
             Controls.Add(lb_timeLeft);
-            Controls.Add(label1);
+            Controls.Add(labelStatus);
             Name = "gameForm";
             Text = "Picture Matching Game";
             ResumeLayout(false);
@@ -103,7 +103,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label labelStatus;
         private Label lb_timeLeft;
         private Button button_Restart;
         private System.Windows.Forms.Timer gameTimer;

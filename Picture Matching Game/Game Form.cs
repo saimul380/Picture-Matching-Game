@@ -1,8 +1,10 @@
+using System.Globalization;
+
 namespace Picture_Matching_Game
 {
     public partial class gameForm : Form
     {
-        List<int> list = new List<int> { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
+        List<int> numbers = new List<int> { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
         string firstChoice;
         string secondChoice;
         int tries;
@@ -13,9 +15,6 @@ namespace Picture_Matching_Game
         int countDownTime;
         bool gameOver = false;
 
-
-
-
         public gameForm()
         {
             InitializeComponent();
@@ -24,11 +23,28 @@ namespace Picture_Matching_Game
 
         private void timerEvent(object sender, EventArgs e)
         {
+            countDownTime--;
+            lb_timeLeft.Text = "Time Left: " + countDownTime;
+
+            if (countDownTime < 1)
+            {
+                GameOver("Times Up, You Lose");
+
+                foreach (PictureBox x in pictures)
+                {
+                    if (x.Tag != null)
+                    {
+                        x.Image = Image.FromFile("pics/" + (string)x.Tag + ".png");
+
+                    }
+                }
+            }
 
         }
 
         private void RestartGameEvent(object sender, EventArgs e)
         {
+            restartGame();
 
         }
         private void loadPictures()
@@ -63,8 +79,6 @@ namespace Picture_Matching_Game
                 }
             }
             restartGame();
-
-
         }
 
         private void NewPic_Click(object? sender, EventArgs e)
@@ -77,7 +91,7 @@ namespace Picture_Matching_Game
             if (firstChoice == null)
             {
                 picA = sender as PictureBox;
-                if (picA.Tag != null && picA.Image == null)
+                if ( picA.Tag != null && picA.Image == null)
                 {
                     picA.Image = Image.FromFile("pics/" + (string)picA.Tag + ".png");
                     firstChoice = (string)picA.Tag;
@@ -86,7 +100,7 @@ namespace Picture_Matching_Game
             else if (secondChoice == null)
             {
                 picB = sender as PictureBox;
-                if (picB.Tag != null && picB.Image == null)
+                if ( picB.Tag != null && picB.Image == null)
                 {
                     picB.Image = Image.FromFile("pics/" + (string)picB.Tag + ".png");
                     secondChoice = (string)picB.Tag;
@@ -96,21 +110,62 @@ namespace Picture_Matching_Game
             {
                 checkPictures(picA, picB);
             }
-
         }
 
         private void restartGame()
         {
+            //randomise the orginal list
+            var randomList = numbers.OrderBy(x => Guid.NewGuid()).ToList();
+            //assaign the random list to the orginal
+            numbers = randomList;
 
-
+            for (int i = 0; i < pictures.Count; i++)
+            {
+                pictures[i].Image = null;
+                pictures[i].Tag = numbers[i].ToString();
+            }
+            tries = 0;
+            labelStatus.Text = " Mismatched: " + tries + "times.";
+            lb_timeLeft.Text = "Time Left: " + totalTime;
+            gameOver = false;
+            gameTimer.Start();
+            countDownTime = totalTime;
         }
+
         private void checkPictures(PictureBox A, PictureBox B)
         {
+            if(firstChoice == secondChoice)
+            {
+                A.Tag = null;
+                B.Tag = null;
+            }
+            else
+            {
+                tries++;
+                labelStatus.Text = "Mismatched " + tries + "times.";
+            }
+            firstChoice = null;
+            secondChoice = null;
 
-
+            foreach ( PictureBox pics in pictures.ToList())
+            {
+                if(pics.Tag != null)
+                {
+                    pics.Image = null;
+                }
+            }
+            // now check if all of the items have been solved
+            if (pictures.All(o=> o.Tag == pictures[0].Tag))
+            {
+                GameOver("Great Work, You Win!!");
+            }
         }
-        private void GameOver()
+
+        private void GameOver(string msg)
         {
+            gameTimer.Stop();
+            gameOver = true;
+            MessageBox.Show(msg + "  Click Restart to Play Again.", "Restart");
 
         }
 
