@@ -28,19 +28,19 @@ namespace Picture_Matching_Game
                 UserNametextBox.Focus();
                 return;
             }
-            if (passwordTextBox.Text.Trim() == "")
+            if (PasswordTextBox.Text.Trim() == "")
             {
                 MessageBox.Show("Enter Your Password", "Password", MessageBoxButtons.OK);
-                passwordTextBox.Focus();
+                PasswordTextBox.Focus();
                 return;
             }
             String username, password;
             username = UserNametextBox.Text;
-            password = passwordTextBox.Text;
+            password = PasswordTextBox.Text;
 
             try
             {
-                String querry = "SELECT * FROM Login_table WHERE username ='" + UserNametextBox.Text + "' AND password = '" + passwordTextBox.Text + "'";
+                String querry = "SELECT * FROM Login_table WHERE username ='" + UserNametextBox.Text + "' AND password = '" + PasswordTextBox.Text + "'";
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
 
                 DataTable dataTable = new DataTable();
@@ -49,7 +49,7 @@ namespace Picture_Matching_Game
                 if (dataTable.Rows.Count > 0)
                 {
                     username = UserNametextBox.Text;
-                    password = passwordTextBox.Text;
+                    password = PasswordTextBox.Text;
 
                     //for load to next form
                     gameForm form = new gameForm();
@@ -60,7 +60,7 @@ namespace Picture_Matching_Game
                 {
                     MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     UserNametextBox.Clear();
-                    passwordTextBox.Clear();
+                    PasswordTextBox.Clear();
                     UserNametextBox.Focus();
                 }
             }
