@@ -21,13 +21,26 @@ namespace Picture_Matching_Game
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            //for must be fill username and password
+            if (UserNametextBox.Text.Trim() == "")       //trim for not accepting space as a string in username
+            {
+                MessageBox.Show("Enter your Username", "Username", MessageBoxButtons.OK);
+                UserNametextBox.Focus();
+                return;
+            }
+            if (passwordTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Enter Your Password", "Password", MessageBoxButtons.OK);
+                passwordTextBox.Focus();
+                return;
+            }
             String username, password;
-            username = usernameTextBox.Text;
+            username = UserNametextBox.Text;
             password = passwordTextBox.Text;
 
             try
             {
-                String querry = "SELECT * FROM Login_table WHERE username ='" + usernameTextBox.Text + "' AND password = '" + passwordTextBox.Text + "'";
+                String querry = "SELECT * FROM Login_table WHERE username ='" + UserNametextBox.Text + "' AND password = '" + passwordTextBox.Text + "'";
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
 
                 DataTable dataTable = new DataTable();
@@ -35,7 +48,7 @@ namespace Picture_Matching_Game
 
                 if (dataTable.Rows.Count > 0)
                 {
-                    username = usernameTextBox.Text;
+                    username = UserNametextBox.Text;
                     password = passwordTextBox.Text;
 
                     //for load to next form
@@ -46,9 +59,9 @@ namespace Picture_Matching_Game
                 else
                 {
                     MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    usernameTextBox.Clear();
+                    UserNametextBox.Clear();
                     passwordTextBox.Clear();
-                    usernameTextBox.Focus();
+                    UserNametextBox.Focus();
                 }
             }
             catch

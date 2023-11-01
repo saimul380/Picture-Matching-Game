@@ -33,7 +33,7 @@
             matricIDlabel = new Label();
             Passwordlabel = new Label();
             UserNametextBox = new TextBox();
-            passwordTextBox = new TextBox();
+            PasswordTextBox = new TextBox();
             matricIDtextBox = new TextBox();
             submitButton = new Button();
             exitButton = new Button();
@@ -97,13 +97,13 @@
             UserNametextBox.Size = new Size(182, 23);
             UserNametextBox.TabIndex = 2;
             // 
-            // passwordTextBox
+            // PasswordTextBox
             // 
-            passwordTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            passwordTextBox.Location = new Point(195, 162);
-            passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(182, 23);
-            passwordTextBox.TabIndex = 6;
+            PasswordTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            PasswordTextBox.Location = new Point(195, 162);
+            PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.Size = new Size(182, 23);
+            PasswordTextBox.TabIndex = 6;
             // 
             // matricIDtextBox
             // 
@@ -175,7 +175,7 @@
             Controls.Add(exitButton);
             Controls.Add(submitButton);
             Controls.Add(matricIDtextBox);
-            Controls.Add(passwordTextBox);
+            Controls.Add(PasswordTextBox);
             Controls.Add(UserNametextBox);
             Controls.Add(Passwordlabel);
             Controls.Add(matricIDlabel);
@@ -195,7 +195,7 @@
         private Label matricIDlabel;
         private Label Passwordlabel;
         private TextBox UserNametextBox;
-        private TextBox passwordTextBox;
+        private TextBox PasswordTextBox;
         private TextBox matricIDtextBox;
         private Button submitButton;
         private Button exitButton;

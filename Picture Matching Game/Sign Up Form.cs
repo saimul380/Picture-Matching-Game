@@ -31,10 +31,10 @@ namespace Picture_Matching_Game
                 UserNametextBox.Focus();
                 return;
             }
-            if (passwordTextBox.Text.Trim() == "")
+            if (PasswordTextBox.Text.Trim() == "")
             {
                 MessageBox.Show("Please! Enter a Unique Password", "Password", MessageBoxButtons.OK);
-                passwordTextBox.Focus();
+                PasswordTextBox.Focus();
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace Picture_Matching_Game
                 SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Username", UserNametextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@MatricID", matricIDtextBox.Text);
-                sqlCommand.Parameters.AddWithValue("@Password", passwordTextBox.Text);
+                sqlCommand.Parameters.AddWithValue("@Password", PasswordTextBox.Text);
 
                 sqlCommand.ExecuteNonQuery();
                 sqlConnection.Close();
@@ -64,7 +64,7 @@ namespace Picture_Matching_Game
             }
             UserNametextBox.Clear();
             matricIDtextBox.Clear();
-            passwordTextBox.Clear();
+            PasswordTextBox.Clear();
 
         }
 
