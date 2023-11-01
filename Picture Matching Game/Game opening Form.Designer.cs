@@ -75,6 +75,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.opening;
             ClientSize = new Size(474, 331);
             Controls.Add(loginButton);
             Controls.Add(signUpButton);
