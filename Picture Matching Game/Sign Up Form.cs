@@ -76,5 +76,12 @@ namespace Picture_Matching_Game
             form.Show();
             this.Hide();
         }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            Login_Form logInForm = new Login_Form();
+            logInForm.Show();
+            this.Hide();
+        }
     }
 }

@@ -161,6 +161,7 @@
             loginButton.TabIndex = 10;
             loginButton.Text = "Login";
             loginButton.UseVisualStyleBackColor = false;
+            loginButton.Click += loginButton_Click;
             // 
             // signUpForm
             // 
