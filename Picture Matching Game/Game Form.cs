@@ -5,7 +5,7 @@ namespace Picture_Matching_Game
 {
     public partial class gameForm : Form
     {
-        
+
         public string username { get; set; }
 
         List<int> numbers = new List<int> { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
@@ -181,23 +181,22 @@ namespace Picture_Matching_Game
 
                     int previousWins = (int)checkWinCommand.ExecuteScalar();
 
-                    if (previousWins > 0)
+                    if (previousWins == 0)
                     {
-                        // Handle the case where the user has already won before
-                        usernameOfTheWinner += " (" + (previousWins + 1) + ")";
+                        // Insert a new record only if the user hasn't won before
+                        var insertQuery = "INSERT INTO WinnerTable VALUES (@Username, @WinTimestamp)";
+                        SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@Username", usernameOfTheWinner);
+                        sqlCommand.Parameters.AddWithValue("@WinTimestamp", winTimestamp);
+                        sqlCommand.ExecuteNonQuery();
                     }
-                    var insertQuery = "INSERT INTO WinnerTable VALUES (@Username, @WinTimestamp)";
-                    SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@Username", usernameOfTheWinner);
-                    sqlCommand.Parameters.AddWithValue("@WinTimestamp", winTimestamp);
-                    sqlCommand.ExecuteNonQuery();
                     sqlConnection.Close();
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Somthing went wrong to insert High Scorer List");
-                }              
+                }
             }
         }
 
