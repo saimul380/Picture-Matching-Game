@@ -49,6 +49,7 @@ namespace Picture_Matching_Game
         private void RestartGameEvent(object sender, EventArgs e)
         {
             restartGame();
+
         }
         private void loadPictures()
         {
@@ -162,7 +163,7 @@ namespace Picture_Matching_Game
             {
                 gameTimer.Stop();
                 gameOver = true;
-                MessageBox.Show("Great Work, You Win!!");
+                MessageBox.Show("Great Work, You Win!!","Wins");
                 try
                 {
                     string usernameOfTheWinner = username; // Replace with the actual username
@@ -174,6 +175,17 @@ namespace Picture_Matching_Game
 
 
                     sqlConnection.Open();
+                    var checkPreviousWinQuery = "SELECT COUNT(*) FROM WinnerTable WHERE Username = @Username";
+                    SqlCommand checkWinCommand = new SqlCommand(checkPreviousWinQuery, sqlConnection);
+                    checkWinCommand.Parameters.AddWithValue("@Username", usernameOfTheWinner);
+
+                    int previousWins = (int)checkWinCommand.ExecuteScalar();
+
+                    if (previousWins > 0)
+                    {
+                        // Handle the case where the user has already won before
+                        usernameOfTheWinner += " (" + (previousWins + 1) + ")";
+                    }
                     var insertQuery = "INSERT INTO WinnerTable VALUES (@Username, @WinTimestamp)";
                     SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@Username", usernameOfTheWinner);
