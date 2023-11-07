@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Collections.Specialized.BitVector32;
-//using System.Data.SqlClient;
 
 namespace Picture_Matching_Game
 {
@@ -20,7 +19,8 @@ namespace Picture_Matching_Game
         {
             InitializeComponent();
         }
-
+        FormCalling formCall = new FormCalling();
+        
 
         private void submitButton_Click(object sender, EventArgs e)
         {
@@ -41,7 +41,9 @@ namespace Picture_Matching_Game
             //connecting submit button with sql server
             try
             {   //connecting connectionstring with class
-                string connectionString = ConnectionString.GetConnectionString();
+                ConnectionString connectionStr = new ConnectionString();
+                string connectionString = connectionStr.GetConnectionString();
+                //connectionStr.GetConnectionString();
 
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
                 sqlConnection.Open();
@@ -70,17 +72,16 @@ namespace Picture_Matching_Game
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            //For connecting exit button with next loaded form
+            //For connecting exit button with next loaded form with FormCalling class
 
-            openingForm form = new openingForm();
-            form.Show();
+            formCall.Call_OpeningForm();
             this.Hide();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            Login_Form logInForm = new Login_Form();
-            logInForm.Show();
+            
+            formCall.Call_LogingForm();
             this.Hide();
         }
     }

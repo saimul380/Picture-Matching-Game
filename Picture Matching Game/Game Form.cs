@@ -5,6 +5,7 @@ namespace Picture_Matching_Game
 {
     public partial class gameForm : Form
     {
+        
         public string username { get; set; }
 
         List<int> numbers = new List<int> { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
@@ -167,8 +168,9 @@ namespace Picture_Matching_Game
                     string usernameOfTheWinner = username; // Replace with the actual username
                     DateTime winTimestamp = DateTime.Now;
 
-                    var connectionStr = ConnectionString.GetConnectionString(); //for use connectingSting Class
-                    SqlConnection sqlConnection = new SqlConnection(connectionStr);
+                    ConnectionString connectionStr = new ConnectionString();
+                    var connectionString = connectionStr.GetConnectionString(); //for use connectingSting Class
+                    SqlConnection sqlConnection = new SqlConnection(connectionString);
 
 
                     sqlConnection.Open();
@@ -203,8 +205,8 @@ namespace Picture_Matching_Game
             res = MessageBox.Show("Do you want to exit", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
-                openingForm form = new openingForm();
-                form.Show();
+                FormCalling formCall = new FormCalling();
+                formCall.Call_OpeningForm();
                 this.Hide();
             }
             else

@@ -16,25 +16,23 @@ namespace Picture_Matching_Game
         {
             InitializeComponent();
         }
+        FormCalling formCall = new FormCalling();
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            signUpForm signupform = new signUpForm();
-            signupform.Show();
+            formCall.Call_SignupForm();
             this.Hide();
         }
 
         private void loginButton_Click_1(object sender, EventArgs e)
         {
-            Login_Form logInForm = new Login_Form();
-            logInForm.Show();
+            formCall.Call_LogingForm();
             this.Hide();
         }
 
         private void WinnerListbutton_Click(object sender, EventArgs e)
         {
-            WinnerFormList winnerListForm = new WinnerFormList();
-            winnerListForm.ShowDialog();
+            formCall.Call_WinnerlistForm();
             this.Hide();
         }
     }

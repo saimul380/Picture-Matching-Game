@@ -13,7 +13,9 @@ namespace Picture_Matching_Game
 {
     public partial class Login_Form : Form
     {
-        private ConnectionString connectionString = new ConnectionString();
+        FormCalling formCall = new FormCalling();
+
+        ConnectionString connectionStr = new ConnectionString();
         public Login_Form()
         {
             InitializeComponent();
@@ -40,12 +42,12 @@ namespace Picture_Matching_Game
 
             try
             {
-                string connectionStr = ConnectionString.GetConnectionString(); //for use connectingSting Class
+                string connectionString = connectionStr.GetConnectionString(); //for use connectingSting Class by object
 
-                using (SqlConnection sqlConnection = new SqlConnection(connectionStr))
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
                     sqlConnection.Open();
-                    String querry = "SELECT * FROM Login_table WHERE username ='" + UserNametextBox.Text + "' AND password = '" + PasswordTextBox.Text + "'";
+                    String querry = "SELECT * FROM Login_table WHERE username COLLATE SQL_Latin1_General_CP1_CS_AS ='" + UserNametextBox.Text + "' AND password COLLATE SQL_Latin1_General_CP1_CS_AS = '" + PasswordTextBox.Text + "'";
                     SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
 
                     DataTable dataTable = new DataTable();
@@ -56,12 +58,12 @@ namespace Picture_Matching_Game
                         username = UserNametextBox.Text;
                         password = PasswordTextBox.Text;
 
-                        //for load to next form
-                        gameForm form = new gameForm();
-                        form.Show();
+                        //for load to next form by FormCalling Class
+                        formCall.Call_GamingForm();
                         this.Hide();
 
                         // Set the Username property of the winnerListForm(transfer username for winnerList)
+                        gameForm form = new gameForm();
                         form.username = username;
 
                     }
@@ -81,18 +83,16 @@ namespace Picture_Matching_Game
         }
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            //For connecting signup(exit) button with next loaded form
-            signUpForm signupform = new signUpForm();
-            signupform.Show();
+            //For connecting signup(exit) button with next loaded form with FormCalling Class
+            formCall.Call_SignupForm();
             this.Hide();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            //For connecting exit button with next loaded form
+            //For connecting exit button with next loaded form with FormCalling Class
 
-            openingForm form = new openingForm();
-            form.Show();
+            formCall.Call_OpeningForm();
             this.Hide();
         }
     }

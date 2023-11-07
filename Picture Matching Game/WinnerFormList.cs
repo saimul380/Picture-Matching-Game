@@ -20,8 +20,9 @@ namespace Picture_Matching_Game
 
         private void showButton_Click(object sender, EventArgs e)
         {
-            string connectionStr = ConnectionString.GetConnectionString();
-            using (SqlConnection sqlConnection = new SqlConnection(connectionStr))
+            ConnectionString connectionStr = new ConnectionString();
+            string connectionString = connectionStr.GetConnectionString();
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
                 string selectQuery = "SELECT Username, WinTimestamp FROM WinnerTable";
