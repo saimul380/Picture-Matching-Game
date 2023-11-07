@@ -20,7 +20,6 @@ namespace Picture_Matching_Game
         {
             InitializeComponent();
         }
-        //SqlConnection sqlConnection = new SqlConnection(@"Data Source=LAPTOP-Q7KTNQDN\SQLEXPRESS;Initial Catalog=""Picture Matching Game Database"";Integrated Security=True");
         private void loginButton_Click(object sender, EventArgs e)
         {
             //for must be fill username and password
