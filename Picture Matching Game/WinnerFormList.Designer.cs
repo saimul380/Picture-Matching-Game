@@ -49,6 +49,7 @@
             // 
             // dataGridViewWinners
             // 
+            dataGridViewWinners.BackgroundColor = SystemColors.ActiveCaptionText;
             dataGridViewWinners.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewWinners.Location = new Point(118, 82);
             dataGridViewWinners.Name = "dataGridViewWinners";
@@ -86,6 +87,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.AppWorkspace;
+            BackgroundImage = Properties.Resources.image4;
             ClientSize = new Size(474, 331);
             Controls.Add(exitButton);
             Controls.Add(showButton);

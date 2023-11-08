@@ -28,7 +28,7 @@ namespace Picture_Matching_Game
             DataTable dataTable = new DataTable();
             dataAdapter.Fill(dataTable);
             dataGridViewWinners.DataSource = dataTable;
-            
+
         }
 
         private void exitButton_Click(object sender, EventArgs e)
