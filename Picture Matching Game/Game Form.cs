@@ -170,8 +170,8 @@ namespace Picture_Matching_Game
                     DateTime winTimestamp = DateTime.Now;
 
                     ConnectionString connectionStr = new ConnectionString();
-                    var connectionString = connectionStr.GetConnectionString(); //for use connectingSting Class
-                    SqlConnection sqlConnection = new SqlConnection(connectionString);
+                    //var connectionString = connectionStr.connectionString; //for use connectingSting Class
+                    SqlConnection sqlConnection = new SqlConnection(connectionStr.connectionString);
 
 
                     sqlConnection.Open();
@@ -183,7 +183,7 @@ namespace Picture_Matching_Game
 
                     if (previousWins == 0)
                     {
-                        // Insert a new record only if the user hasn't won before
+                        // For Insert a new record only if the user hasn't won before
                         var insertQuery = "INSERT INTO WinnerTable VALUES (@Username, @WinTimestamp)";
                         SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@Username", usernameOfTheWinner);

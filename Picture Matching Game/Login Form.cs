@@ -15,7 +15,7 @@ namespace Picture_Matching_Game
     {
         FormCalling formCall = new FormCalling();
 
-        ConnectionString connectionStr = new ConnectionString();
+        //ConnectionString connectionStr = new ConnectionString();
         public Login_Form()
         {
             InitializeComponent();
@@ -42,14 +42,12 @@ namespace Picture_Matching_Game
 
             try
             {
-                string connectionString = connectionStr.GetConnectionString(); //for use connectingSting Class by object
-
-                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-                {
+                ConnectionString connectionStr = new ConnectionString();  //for use connectingSting Class by object
+                    
+                    SqlConnection sqlConnection = new SqlConnection(connectionStr.connectionString);
                     sqlConnection.Open();
                     String querry = "SELECT * FROM Login_table WHERE username COLLATE SQL_Latin1_General_CP1_CS_AS ='" + UserNametextBox.Text + "' AND password COLLATE SQL_Latin1_General_CP1_CS_AS = '" + PasswordTextBox.Text + "'";
                     SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
-
                     DataTable dataTable = new DataTable();
                     sqlDataAdapter.Fill(dataTable);
 
@@ -65,7 +63,6 @@ namespace Picture_Matching_Game
 
                         // Set the Username property of the winnerListForm(transfer username for winnerList)
                         form.username = username;
-
                     }
                     else
                     {
@@ -74,7 +71,7 @@ namespace Picture_Matching_Game
                         PasswordTextBox.Clear();
                         UserNametextBox.Focus();
                     }
-                }
+                
             }
             catch
             {

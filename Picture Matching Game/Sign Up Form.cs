@@ -40,16 +40,12 @@ namespace Picture_Matching_Game
 
             //connecting submit button with sql server
             try
-            {   //connecting connectionstring with class
-                ConnectionString connectionStr = new ConnectionString();
-                string connectionString = connectionStr.GetConnectionString();
-                //connectionStr.GetConnectionString();
-
-                SqlConnection sqlConnection = new SqlConnection(connectionString);
+            {   
+                ConnectionString connectionStr = new ConnectionString(); //connecting connectionstring with class's object
+                SqlConnection sqlConnection = new SqlConnection(connectionStr.connectionString);
                 sqlConnection.Open();
 
                 var insertQuery = "insert into Login_table values(@Username, @MatricID, @Password)";
-
                 SqlCommand sqlCommand = new SqlCommand(insertQuery, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Username", UserNametextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@MatricID", matricIDtextBox.Text);
@@ -67,7 +63,6 @@ namespace Picture_Matching_Game
             UserNametextBox.Clear();
             matricIDtextBox.Clear();
             PasswordTextBox.Clear();
-
         }
 
         private void exitButton_Click(object sender, EventArgs e)

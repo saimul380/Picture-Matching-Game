@@ -8,9 +8,6 @@ namespace Picture_Matching_Game
 {
     internal class ConnectionString
     {
-        public string GetConnectionString()
-        {
-            return "Data Source=LAPTOP-Q7KTNQDN\\SQLEXPRESS;Initial Catalog=Picture Matching Game Database;Integrated Security=True";
-        }
+        public string connectionString = "Data Source=LAPTOP-Q7KTNQDN\\SQLEXPRESS;Initial Catalog=Picture Matching Game Database;Integrated Security=True";
     }
 }

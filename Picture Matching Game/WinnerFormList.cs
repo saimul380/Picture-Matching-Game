@@ -21,17 +21,14 @@ namespace Picture_Matching_Game
         private void showButton_Click(object sender, EventArgs e)
         {
             ConnectionString connectionStr = new ConnectionString();
-            string connectionString = connectionStr.GetConnectionString();
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-            {
-                sqlConnection.Open();
-                string selectQuery = "SELECT Username, WinTimestamp FROM WinnerTable";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectQuery, sqlConnection);
-                DataTable dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
-
-                dataGridViewWinners.DataSource = dataTable;
-            }
+            SqlConnection sqlConnection = new SqlConnection(connectionStr.connectionString);
+            sqlConnection.Open();
+            string selectQuery = "SELECT Username, WinTimestamp FROM WinnerTable";
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(selectQuery, sqlConnection);
+            DataTable dataTable = new DataTable();
+            dataAdapter.Fill(dataTable);
+            dataGridViewWinners.DataSource = dataTable;
+            
         }
 
         private void exitButton_Click(object sender, EventArgs e)
