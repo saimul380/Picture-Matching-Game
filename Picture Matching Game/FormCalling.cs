@@ -10,28 +10,28 @@ namespace Picture_Matching_Game
     {
         public void Call_GamingForm()
         {
-            gameForm form = new gameForm();
-            form.Show();
+            gameForm gform = new gameForm();
+            gform.Show();
         }
         public void Call_OpeningForm()
         {
-            openingForm form = new openingForm();
-            form.Show();
+            openingForm oform = new openingForm();
+            oform.Show();
         }
         public void Call_LogingForm()
         {
-            Login_Form logInForm = new Login_Form();
-            logInForm.Show();
+            Login_Form lForm = new Login_Form();
+            lForm.Show();
         }
         public void Call_SignupForm()
         {
-            signUpForm signupform = new signUpForm();
-            signupform.Show();
+            signUpForm sform = new signUpForm();
+            sform.Show();
         }
         public void Call_WinnerlistForm()
         {
-            WinnerFormList winnerListForm = new WinnerFormList();
-            winnerListForm.Show();
+            WinnerFormList wForm = new WinnerFormList();
+            wForm.Show();
         }
     }
 }
