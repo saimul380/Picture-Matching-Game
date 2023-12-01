@@ -15,12 +15,10 @@ namespace Picture_Matching_Game
     {
         FormCalling formCall = new FormCalling();
 
-        //ConnectionString connectionStr = new ConnectionString();
         public Login_Form()
         {
             InitializeComponent();
         }
-        //SqlConnection sqlConnection = new SqlConnection(@"Data Source=LAPTOP-Q7KTNQDN\SQLEXPRESS;Initial Catalog=""Picture Matching Game Database"";Integrated Security=True");
         private void loginButton_Click(object sender, EventArgs e)
         {
             //for must be fill username and password
@@ -44,32 +42,32 @@ namespace Picture_Matching_Game
             {
                 ConnectionString connectionStr = new ConnectionString();  //for use connectingSting Class by object
                     
-                    SqlConnection sqlConnection = new SqlConnection(connectionStr.connectionString);
-                    sqlConnection.Open();
-                    String querry = "SELECT * FROM Login_table WHERE username COLLATE SQL_Latin1_General_CP1_CS_AS ='" + UserNametextBox.Text + "' AND password COLLATE SQL_Latin1_General_CP1_CS_AS = '" + PasswordTextBox.Text + "'";
-                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
-                    DataTable dataTable = new DataTable();
-                    sqlDataAdapter.Fill(dataTable);
+                SqlConnection sqlConnection = new SqlConnection(connectionStr.connectionString);
+                sqlConnection.Open();
+                String querry = "SELECT * FROM Login_table WHERE username COLLATE SQL_Latin1_General_CP1_CS_AS ='" + UserNametextBox.Text + "' AND password COLLATE SQL_Latin1_General_CP1_CS_AS = '" + PasswordTextBox.Text + "'";
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(querry, sqlConnection);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
 
-                    if (dataTable.Rows.Count > 0)
-                    {
-                        username = UserNametextBox.Text;
-                        password = PasswordTextBox.Text;
+                if (dataTable.Rows.Count > 0)
+                {
+                     username = UserNametextBox.Text;
+                     password = PasswordTextBox.Text;
 
-                        //for load to next form
-                        gameForm form = new gameForm();
-                        form.Show();
-                        this.Hide();
+                     //for load to next form
+                     gameForm gform = new gameForm();
+                     gform.Show();
+                     this.Hide();
 
-                        // Set the Username property of the winnerListForm(transfer username for winnerList)
-                        form.username = username;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        UserNametextBox.Clear();
-                        PasswordTextBox.Clear();
-                        UserNametextBox.Focus();
+                     // Set the Username property of the winnerListForm(transfer username for winnerList)
+                     gform.username = username;
+                }
+                else
+                {
+                     MessageBox.Show("Incorrect Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     UserNametextBox.Clear();
+                     PasswordTextBox.Clear();
+                     UserNametextBox.Focus();
                     }
                 
             }
