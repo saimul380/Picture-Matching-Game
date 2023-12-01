@@ -33,8 +33,8 @@ namespace Picture_Matching_Game
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            openingForm form = new openingForm();
-            form.Show();
+            FormCalling formCall = new FormCalling();    //call by formcalling class
+            formCall.Call_OpeningForm();
             this.Hide();
         }
     }
